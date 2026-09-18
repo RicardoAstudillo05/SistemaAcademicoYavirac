@@ -36,6 +36,10 @@ services:
 
     restart: "no"
 
+    depends_on:
+      postgres:
+        condition: service_healthy
+
     environment:
       NODE_ENV: development
       DB_HOST: postgres
@@ -52,10 +56,6 @@ services:
         "-d",
         "dist/database/data-source.js"
       ]
-
-    depends_on:
-      postgres:
-        condition: service_healthy
 
     networks:
       - academico_private
